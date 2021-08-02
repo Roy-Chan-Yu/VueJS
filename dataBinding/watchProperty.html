@@ -15,7 +15,7 @@
 
     <div id = "lab">
         Kilograms: <input type="text" v-model="kilograms" >
-        BMI : <input type="text" v-model= "height">
+        Height : <input type="text" v-model= "height">
     </div>
 
     <div id = "lab2">{{fullname}}</div>
@@ -57,11 +57,11 @@
             watch: {
                 kilograms: function(val) {
                     this.kilograms = val;
-                    this.height = val * 22.5;
+                    this.height = val * 1.1;
                 },
                 height: function(val) {
                     this.height = val;
-                    this.kilograms = val / 22.5;
+                    this.kilograms = val / 1.1;
                 }
             }
 
