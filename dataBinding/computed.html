@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        This is the original message:<h2>{{message}}</h2>
+        This is the Computed reversed message:<h4>{{reversedMessage}}</h4>
+    </div>
+
+    <div id = "props">
+        FirstName: <input type="text" v-model="firstname" /><br/>
+        LastName: <input type="text" v-model="lastname" /><br/>
+        <h2>{{firstname}}_{{lastname}}</h2>
+        <h2>Retrieve name by function: {{getfullname}}</h2>
+    </div>
+
+    <div id= "com_props">
+        <input type="text" v-model="fullname" />
+        <h2>{{firstname}}</h2>
+        <h2>{{lastname}}</h2>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Heelo'
+            },
+            computed: {
+                reversedMessage: function(){
+                    return this.message.split("").reverse().join("");
+                },
+                get: function(){
+                    return this.message;
+                },
+                set: function(name){
+                    var fname = name.split(" ");                    
+                }
+            }
+        })
+
+        var vm1 = new Vue({
+            el : '#props',
+            data: {
+                firstname: '',
+                lastname: '',
+                birthday: '' 
+            },
+            computed: {
+                getfullname : function(){
+                    return this.firstname+" " + this.lastname;
+                }
+            }
+        });
+
+        var vm2 = new Vue({
+            el: '#com_props',
+            data: {
+                firstname: "Alex",
+                lastname : ""
+            },
+            methods: {
+
+            },
+            computed: {
+                fullname: {
+                    get: function(){
+                        return this.firstname+"" + this.lastname;
+                    },
+                    set: function(name) {
+                        var fname = name.split(" ");
+                        this.firstname = fname[0];
+                        this.lastname = fname[1];
+                    }
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

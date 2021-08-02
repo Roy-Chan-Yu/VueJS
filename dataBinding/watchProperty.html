@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id = watch>
+        Kilometers: <input type="text" v-model="kilometers" >
+        Meters: <input type="text" v-model="meters">
+    </div>
+
+    <div id = "lab">
+        Kilograms: <input type="text" v-model="kilograms" >
+        BMI : <input type="text" v-model= "height">
+    </div>
+
+    <div id = "lab2">{{fullname}}</div>
+
+    <script>
+        var vm = new Vue({
+            el: '#watch',
+            data : {
+                kilometers: 0,
+                meters:0
+            },
+            methods: {
+
+            },
+            computed: {
+
+            },
+            watch: {
+                kilometers: function(val){
+                    this.kilometers = val;
+                    this.meters = val * 1000;
+                },
+                meters: function(val){
+                    this.kilometers = val/1000;
+                    this.meters = val;
+                }
+            }
+        });
+
+        var lab = new Vue({
+            el: '#lab',
+            data: {
+                kilograms:0,
+                height:0
+            },
+            computed: {
+
+            },
+            watch: {
+                kilograms: function(val) {
+                    this.kilograms = val;
+                    this.height = val * 22.5;
+                },
+                height: function(val) {
+                    this.height = val;
+                    this.kilograms = val / 22.5;
+                }
+            }
+
+        });
+
+        var lab2 = new Vue({
+            el: '#lab2',
+            data: {
+                firstname: 'Alex',
+                lastname: 'Roy',
+                // Computed is only one data convention
+                // watch can be the same data convention 
+                //fullname:'' 
+                 
+            },
+            computed: {
+                fullname: function(){
+                    return this.firstname+' '+ this.lastname;
+                }
+            },
+            watch: {
+                firstname: function(val) {
+                    this.fullname = val + ' ' +this.lastname;
+                },
+                lastname: function(val) {
+                    this.fullname = this.firstname + ' '+ val;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

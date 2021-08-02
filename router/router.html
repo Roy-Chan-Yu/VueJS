@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> 
+</head>
+<body>
+
+    <div id = "router_1">
+        <h2>This is Routing Example</h2>
+        <p>
+            <router-link v-bind:to = "{path: '/route1'}"  tag = "span">Click on Router Link 2</router-link>
+            <router-link v-bind:to = "{path: '/route2'}" tag = "span"> Click on Router Link 3</router-link>
+        </p>
+
+        <router-view></router-view>
+    </div>
+
+    <script>
+        const route1 = {template:'<div style = "border-radius:30px;">ROOT1</div>'}
+        const route2 = {template: '<div style = "background-color:lightblue;">Root2</div>'}
+
+        const routes = [
+            {path: '/route1', component: route1},
+            {path: '/route2', component: route2}
+        ];
+
+        const router = new VueRouter({
+            routes
+        })
+
+    </script>
+
+    <script>
+        var vm = new Vue({
+            el: '#router_1',
+            router
+        })
+    </script>
+
+</body>
+</html>

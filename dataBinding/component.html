@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="component1">
+        <testComponent>
+
+        </testComponent>
+
+    </div>
+
+    <div id="component2">
+        <testComponent></testComponent>
+    </div>
+
+    <div id = "component_t1">
+        <eventcomponent></eventcomponent>
+    </div>
+
+    <div id = "component_t2">
+        <eventcomponent></eventcomponent>
+    </div>
+
+    <input type="text" v-model="eventcomponent" placeholder="請輸入你的名字">
+
+    <script>
+        Vue.component('testcomponent', {
+            template: '<div><h3>This is a Component Example</h3></div>'
+        });
+
+        var vm = new Vue({
+            el: '#component1'
+        });
+
+        var vm2 = new Vue({
+            el: '#component2'
+        })
+
+    </script>
+
+    <script>
+        Vue.component('eventcomponent', {
+            
+            template: '<div v-on:mouseover = "changename()" v-on:mouseout = "originname();"><h1>This Custom Component is created by<span id="name"> {{name}}</span></h1></div>',
+            data: function(){
+                return {
+                    name: "Panda"
+                }
+            },
+            methods: {
+                changename: function(){
+                    this.name="Alex";
+                },
+
+                originname: function(){
+                    this.name= "Panda";
+                }
+            }
+        });
+
+        var vm = new Vue({
+            el: '#component_t1'
+        });
+
+        var vm1 = new Vue({
+            el: '#component_t2'
+        }) 
+
+    </script>
+</body>
+</html>

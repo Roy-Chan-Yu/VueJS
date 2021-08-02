@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id = "app">
+        <h1>{{firstName}}</h1>
+        <h1>{{lastName}}</h1>
+        <div v-html="htmlContent"></div>
+        <div :title="htmlContent">{{htmlContent}}</div>
+        <img v-bind:src = "imgsrc" width ="300" height= "250"/>
+    </div>
+
+    <script>
+       var app = new Vue({
+            el : '#app',
+            data: {
+                firstName: "Roy",
+                lastName: "Chan",
+                htmlContent: "<div><h3>Vue.js template</h3></div>",
+                imgsrc: "https://image.shutterstock.com/image-photo/los-angeles-aug-8-philadelphia-600w-98474114.jpg"
+            }
+        })
+    </script>
+</body>
+</html>

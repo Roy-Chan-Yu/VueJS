@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    
+    <body>
+        
+        <div id="app">
+            {{message }}
+        </div>
+        <!--
+            v-if
+        -->
+        <div id="app-2">
+        <span v-if="seen">This is visible for you  <br>
+        <span v-bind:title="message">
+            PlaceHolder
+        </span>
+        </span>
+        </div>
+
+        <!--
+            v-else-if Directive
+
+            v-if ==true then next v-else-if block = true;
+            v-if ---- v-else
+            v-else-if follow the previous block
+        -->
+
+        <div id="elseIf">
+            <span v-if="seen">Now you can see me</span>
+            <span v-else-if=>You can't see me..</span>
+            <span v-else>You can see me too</span>
+        </div>
+
+        <script>
+            var elseIf = new Vue({
+                el: '#elseIf',
+                data: {
+                    seen:false
+                }
+            })
+        </script>
+
+        <!--
+            v-html
+        -->
+        <div id="app-html">
+            <span v-html="link"></span>
+        </div>
+
+        <!--
+            MVVM  viewModel
+        -->
+
+        <div id="vmodel">
+            <input v-model="message"/>
+            <p>{{message}}</p>
+        </div>
+
+        <script>
+            var vmodel = new Vue({
+                el: '#vmodel',
+                data: {
+                    message: ""
+                }
+            })
+        </script>
+
+        <!--
+            v-on
+        -->
+        <div id ="clickBtn">
+            <input type="button" value="tennis" v-on:click="onClick">
+            
+        </div>
+        <div id ="clickBtn2">
+            <input type="button" value="soccer" v-on:click="onClick2">
+        </div>
+
+        <!--
+            v-bind
+        -->
+
+        <div id = "v-bind">
+            <img v-bind:src="imgUrl" width="200px"/>
+
+        </div>
+
+        <!-- 
+            v-for todo
+        -->
+
+        <div id="vfor">
+            <ul>
+                <li v-for="list in lists">
+                    Programming: {{list.category}}
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            var vfor = new Vue({
+                el: '#vfor',
+                data: {
+                    lists: [
+                        {category: 'Javascript'},
+                        {category: 'Java'},
+                        {category: 'Vue.js'},
+                        {category: 'TypeScript'}
+                    ]
+                }
+
+            });
+        </script>
+
+        <!--
+            v-on:click
+        -->
+
+        <div id="clickEvent">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">Reverse Message</button>
+        </div>
+
+        <script>
+            var clickEvent=new Vue({
+                el: '#clickEvent',
+                data: {
+                    message: 'This is ReversingMessage'
+                },
+                methods: {
+                    reverseMessage: function(){
+                        this.message = this.message.split('').reverse().join('');
+                    }
+                }
+            });
+        </script>
+        <!-- 
+            Component
+        -->
+        <div id="todoBind">
+            <ol>
+                <todo-cource
+                    v-for="course in courseList"
+                    v-bind:todo="course"
+                    v-bind:key="course.id"
+                >
+                </todo-cource>
+            </ol>
+        
+        </div>
+
+        <script>
+            Vue.component('todo-cource',{
+                props:['todo'],
+                template:'<li>{{todo.text}}</li>'
+            })
+
+            var todoBind = new Vue({
+                el: '#todoBind',
+                data: {
+                    courseList:[
+                        {id:0,text:'Java'},
+                        {id:1,text:'JavaScript'},
+                        {id:2,text: 'Vue.js'}
+                    ]
+                }
+            })
+        </script>
+
+        <script src="./src/index.js"></script> 
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'This is a simple Vue.js example...'
+                },
+                seen: true,
+                filters: {
+                    toUps: function(obj) {
+                        return obj.toUppersCase();
+                    }
+                }
+            });
+
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    message:'You loaded this page on'+new Date().toLocaleString(),
+                    seen: true
+                }
+            });   
+            //vue-html -->  v-html
+            var appHtml = new Vue({
+                el: '#app-html',
+                data: {
+                    link: '<a href="#">This is a Hashtag </a>'
+                },
+                filters: {
+                    toUppers:function(obj){
+                        return obj.UpperCase();
+                    }
+                }
+            });
+
+            var app5 = new Vue({
+                el:'#clickBtn',
+                methods: {
+                    onClick: function(obj){
+                        console.log('onclick...'+obj.name);
+                        appBind.imgUrl = './src/img/tennis.jpeg'
+                    }
+                }
+            });
+
+            var app6 = new Vue({
+                el:'#clickBtn2',
+                methods: {
+                    onClick2: function(obj){
+                        appBind.imgUrl = './src/img/ball.jpeg'
+                    }
+                }
+            })
+
+            var appBind = new Vue({
+                el: '#v-bind',
+                data: {
+                    imgUrl: './src/img/ball.jpeg'
+                }
+            })
+
+           
+
+        </script>
+    </body>
+</html>

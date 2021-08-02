@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+</head>
+<body>
+    <div id = "directive">
+        <div v-changestyle>Vue.js Custom Directive Example</div>
+    </div>
+
+    <script type="text/javascript">
+        Vue.directive("changestyle",{
+            bind(el,binding,vnode) {
+                console.log(el);
+                binding.value = "blue";
+                el.style.color = "red";
+                el.style.fontSize = "20px";
+                el.style.color = binding.value;
+                console.log(binding.value);
+                
+            }
+        });
+
+        var vm = new Vue({
+            el : '#directive',
+            data : {
+
+            },
+            methods : {
+
+            }
+        })
+    </script>
+
+    <!--
+        pass a value to the custom directive
+        v-changestyle2 = "{color: 'the_color_name'}"
+    -->
+
+    <div id = "directive2">
+        <div v-changestyle2 = "{color:'green'}">Passing value to custom directive</div>
+    </div>
+
+    <script>
+        Vue.directive("changestyle2",{
+            bind(el, binding, vnode) {
+                console.log(el);
+                console.log(binding.value.color);
+                console.log(vnode);
+                el.style.color = binding.value.color;
+                el.style.fontSize = "25px";
+            }
+        });
+    </script>
+
+    <script>
+        var vm = new Vue({
+            el: '#directive2',
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+
+    <!--
+        Using Filters with Custom Directives
+    -->
+
+    <div id = "directivefilters">
+        <input v-model = "name" placeholder = "Enter your Name" /> <br/>
+        <span style="font-size: 20px;"><b>Letter count is : {{name | countletters}}</b></span>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#directivefilters',
+            data: {
+                name : ''
+            },
+            filters: {
+                countletters: function(val) {
+                    return val.length;
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

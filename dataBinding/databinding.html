@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: #4F8A10;
+            background-color: #DFF2BF;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!--
+        Data Binding
+    -->
+    <div id = "databinding">
+        <h3>{{title}}</h3>
+        <a href="http://www.javatpoint.com" target="_blank">Click Here</a><br/>
+        <a href = "{{hreflink}}" target="_blank">Click Here</a> <br/>
+        <a v-bind:href= "hreflink" target="_blank">Click Here</a> <br/>
+        <a :href = "hreflink" target="_blank">Click Here</a><br/>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#databinding',
+            data: {
+                hreflink: "http://www.javatpoint.com",
+                title : "dataBinding"
+            }
+        })
+    </script>
+
+    <!--
+        Binding Class in container
+    -->
+    <div id = "classbinding">
+        <div v-bind:class= "{active:isactive}"><b>{{title}}</b></div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#classbinding',
+            data : {
+                title: "Html Class Binding",
+                isactive: true
+            }
+        })
+    </script>
+
+    <div id = "classbinding2">
+        <div v-bind:class = "[infoclass,errorclass]">{{title}}</div>
+    </div>
+
+    <style>
+        
+        .info {
+            color: #00529B;
+            background-color: #BDE5F8;
+        }
+
+        .displayError {
+            color: #D8000C;
+            background-color: #FFBABA;
+        }
+
+    </style>
+    <script>
+        var vm = new Vue({
+            el: '#classbinding2',
+            data : {
+                title: 'Multiple class with array example',
+                infoclass: 'info',
+                errorclass: 'displayError'
+            }
+        })
+    </script>
+
+</body>
+</html>

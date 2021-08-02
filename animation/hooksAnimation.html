@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href = "https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel = "stylesheet" type = "text/css">  
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+    
+</head>
+<body>
+    
+    <style>
+        html, body {
+            margin: 5px;
+            padding: 0;
+        }
+    </style>
+
+    <div id = "trans">
+        <button @click = "show = !show">
+            <span style = "font-size:25px;">Toggle</span>
+        </button>
+        <transition v-on:before-enter = "beforeEnter"
+            v-on:enter = "enter"
+            v-on:leave = "leave"
+            v-bind:css = "false">
+            <p v-if = "show" style="font-size: 25px;">This is a animation with velocity...</p>
+        </transition>
+
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el : '#trans',
+            data : {
+                show : false
+            },
+            methods : {
+                beforeEnter : function(el) {
+                    el.style.opacity = 0
+                },
+                enter : function(el,done) {
+                    Velocity(el, {opacity: 1, fontSize: '25px'}, {duration:1000})
+                    Velocity(el, {fontSize: '10px'},{complete: done})
+                },
+                leave : function(el,done) {
+                    Velocity(el, {
+                        rotateZ: '45deg',
+                        translateY: '30px',
+                        translateX: '30px',
+                        opacity: 0
+                    },{complete: done})
+                },
+                test : function(el) {
+                    console.log(el);
+                }
+            }
+        })
+    </script>
+
+
+    <!--
+        Transition on Initial Render...
+    -->
+    <div id = trans2 style="text-align:center;width: 50%;">
+        
+        <transition
+          appear
+          appear-class = "custom-appear-class"
+          appear-active-class = "animated bounceIn">
+          <h3>This is BounceIn Animation Example</h3>
+        </transition>
+
+        <transition
+          appear
+          appear-class = "custom-appear-class"
+          appear-active-class = "animated swing">
+          <h3>This is Swing Animation Example</h3>
+        </transition>
+        
+        <transition
+          appear
+          appear-class = "custom-appear-class"
+          appear-active-class = "animated rubberBand">
+          <h3>This is RubberBand Animation Example</h3>
+        </transition>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el : '#trans2',
+            data : {
+                show : true
+            }
+        })
+    </script>
+
+</body>
+</html>
